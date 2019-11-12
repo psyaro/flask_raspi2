@@ -1,0 +1,50 @@
+<!-- extends "bootstrap/base.html" -->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap-grid.min.css" rel="stylesheet">
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+<!--{% block title %}Hello{% endblock %}-->
+
+{% block content %}
+<div class="container container-fluid">
+  <div class="page-header">
+    <h1>発報</h1>
+  </div>
+  <div class="row">
+    <!--<input type="button" onclick="location.href=''"value="音を鳴らす(5秒)">-->
+    <p><input type="button" id="button" value="音を鳴らす(5秒)" /></p>
+    <p>繰り返し押すことができます。（間隔をおいてください）</p>
+    <p><div id="text"></div></p>
+  </div>
+  <div class="row">
+    <p><input type="button" id="button2" value="send message(beta)" onclick="location.href=''" /></p>
+</div>
+
+<script>
+  $(function() {
+    $('#button').click(
+      function() {
+        $.ajax({
+          beforeSend: function(){
+            $("#button").attr("disabled","true"); 
+          },
+          url: '',
+          dataType: 'html',
+          success: function(data) {
+            $('#text').html('done');
+          },
+          error: function(data) {
+            alert('error');
+          },
+          complete: function(xhr,event){
+            $("#button").removeAttr("disabled");
+          }
+        });
+      }
+    );
+  });
+</script>
+{% endblock %}
